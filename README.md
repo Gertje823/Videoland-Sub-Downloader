@@ -9,14 +9,14 @@ Download ondertiteling van Videoland series.
 4. Vul het nummer van het seizoen in.
 
 
-*Het kan zijn dat er voor bepaalde series geen ondertiteling te downloaden is omdat deze is 'ingebakken' in het videobestand zelf.
+*Het kan zijn dat er voor bepaalde series geen ondertiteling te downloaden is omdat deze is 'ingebakken' in het videobestand zelf.*
 
 ## Cookie
 Om de ondertiteling te downloaden heb je `VlId` cookie nodig.
 
-[Deze kan je hier vinden in chrome]: https://thisinterestsme.com/modifying-cookies-developer-tools/
+[Deze kan je hier vinden in chrome](https://thisinterestsme.com/modifying-cookies-developer-tools/)
 
 
 
 
-*Dit script maakt gebruik van de openbare Videoland api. Dit script is niet aangesloten, geassocieerd, geautoriseerd, goedgekeurd door, of op enigerlei wijze officieel verbonden met Videoland of RTL.
+*Dit script maakt gebruik van de openbare Videoland api. Dit script is niet aangesloten, geassocieerd, geautoriseerd, goedgekeurd door, of op enigerlei wijze officieel verbonden met Videoland of RTL.*
