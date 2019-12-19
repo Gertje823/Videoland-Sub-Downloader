@@ -1,5 +1,6 @@
 # Videoland-Sub-Downloader
-Download ondertiteling van Videoland series.
+Download ondertiteling van Videoland series. Het downloaden gaat per seizoen.
+Voor het downloaden is wel een videoland account nodig.
 
 
 ## Hoe werkt het
@@ -18,5 +19,5 @@ Om de ondertiteling te downloaden heb je `VlId` cookie nodig.
 
 
 
-
+## Disclaimer
 *Dit script maakt gebruik van de openbare Videoland api. Dit script is niet aangesloten, geassocieerd, geautoriseerd, goedgekeurd door, of op enigerlei wijze officieel verbonden met Videoland of RTL.*
