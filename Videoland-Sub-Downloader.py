@@ -4,10 +4,9 @@ import time
 from bs4 import BeautifulSoup
 
 cookie = {'vlId': 'HERE_YOUR_VLID'}
-url = input("What is the Videoland url?")
-Season = input("Which season? (e.g. 3)")
+url = input("Wat is de Videoland url?")
+Season = input("Welk seizoen? (bv. 3)")
 Season = "{0:0=2d}".format(int(Season))
-test = 0
 Ep = 0
 data = requests.get(url)
 soup = BeautifulSoup(data.text, "html.parser")
