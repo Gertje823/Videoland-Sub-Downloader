@@ -1,13 +1,13 @@
 # Videoland-Sub-Downloader
-Download ondertiteling van Videoland series. Het downloaden gaat per seizoen.
-Voor het downloaden is wel een videoland account nodig.
+Download ondertiteling van Videoland series en films. Het downloaden voor series gaat per seizoen.
+Voor het downloaden is wel een videoland account nodig. Dit hoeft echter geen betaald account te zijn.
 
 
 ## Hoe werkt het
 1. Zet je cookie in de `Videoland-Sub-Downloader.py` op regel 6.
 2. Run het script `python3 Videoland-Sub-Downloader.py`
-3. Vul de Videoland url in van de serie waarvan je de ondertiteling wilt downloaden.
-4. Vul het nummer van het seizoen in.
+3. Vul de Videoland url in waarvan je de ondertiteling wilt downloaden.
+4. Als het een serie is vul dan het nummer van het seizoen in.
 
 
 *Het kan zijn dat er voor bepaalde series geen ondertiteling te downloaden is omdat deze is 'ingebakken' in het videobestand zelf.*
