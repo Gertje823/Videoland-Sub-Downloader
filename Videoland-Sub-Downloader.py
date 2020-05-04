@@ -2,9 +2,10 @@ import requests
 import urllib.request
 import time
 from bs4 import BeautifulSoup
+from vtt_to_srt.__main__ import vtt_to_srt
+import os
 
-cookie = {'vlId': 'YOUR vlId HERE'}
-
+cookie = {'vlId': 'YOUR_vlId_HERE'}
 
 url = input("Wat is de Videoland url?")
 if "/films/" in url:
@@ -20,6 +21,7 @@ if "/films/" in url:
     year = movie_info[0]
     print(year)
     filename = f"{title}.({year}).vtt"
+    filename = filename.replace(":","")
     link = f"https://www.videoland.com/api/v3/subtitles/{x[4]}"
     r = requests.get(link, cookies=cookie)
     if r.status_code == 404:
@@ -27,6 +29,9 @@ if "/films/" in url:
     else:
         print(f"{filename} aan het downloaden")
         open(filename, 'wb').write(r.content)
+        print("Converting to srt")
+        vtt_to_srt(filename)
+        os.remove(filename)
 
 elif "/series/" in url:
     
@@ -53,6 +58,7 @@ elif "/series/" in url:
                     Ep+=1
                     Ep= "{0:0=2d}".format(Ep)
                     filename = f"{title}.S{Season}E{Ep}.vtt"
+                    filename = filename.replace(":","")
                     Ep= int(Ep)
                     r = requests.get(link, cookies=cookie)
                     if r.status_code == 404:
@@ -60,6 +66,9 @@ elif "/series/" in url:
                     else:
                         print(f"{filename} aan het downloaden")
                         open(filename, 'wb').write(r.content)
+                        print("Converting to srt")
+                        vtt_to_srt(filename)
+                        os.remove(filename)
         else:
             pass
 
