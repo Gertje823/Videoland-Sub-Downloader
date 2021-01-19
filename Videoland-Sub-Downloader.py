@@ -33,8 +33,8 @@ if "/films/" in url:
         os.remove(filename)
 
 elif "/series/" in url:
-    link = re.search(url_pattern, url).group(4)
     try:
+        link = re.search(url_pattern, url).group(4)
         url= url.replace(link,"")
     except:
         pass
