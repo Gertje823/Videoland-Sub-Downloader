@@ -1,7 +1,7 @@
 import requests, re, json, time, os
 import urllib.request
 from bs4 import BeautifulSoup
-from vtt_to_srt.__main__ import vtt_to_srt
+from vtt_to_srt import vtt_to_srt
 
 cookie = {'vlId': 'YOUR_vlId_HERE'}
 
@@ -29,12 +29,13 @@ if "/films/" in url:
         print(f"{filename} aan het downloaden")
         open(filename, 'wb').write(r.content)
         print("Converting to srt")
-        vtt_to_srt(filename)
+        vtt_to_srt.vtt_to_srt(filename)
         os.remove(filename)
 
 elif "/series/" in url:
     try:
         link = re.search(url_pattern, url).group(4)
+        print(link)
         url= url.replace(link,"")
     except:
         pass
@@ -45,16 +46,14 @@ elif "/series/" in url:
     soup = BeautifulSoup(data.text, "html.parser")
     title = soup.select('h1')[0].text.strip()
     title = title.replace(" ", ".")
-
+    x = url.split("/")
     # Get json with serie data
-
     pattern = "window.__INITIAL_STATE__ =(.*?);</script><script>"
     json_data = re.search(pattern, data.text).group(1)
     data = json.loads(json_data)
     season_num = 0
-
     # Check for wanted season
-    for season in data["videos"]["details"]["S500175"]["refs"]:
+    for season in data["videos"]["details"][f"S{x[4]}"]["refs"]:
         if season_num == int(wanted_season)-1:
             season = season.replace("SN", "")
             path = data["application"]["path"]["current"]
@@ -83,7 +82,7 @@ elif "/series/" in url:
                         print(f"{filename} aan het downloaden")
                         open(filename, 'wb').write(r.content)
                         print("Converting to srt")
-                        vtt_to_srt(filename)
+                        vtt_to_srt.vtt_to_srt(filename)
                         os.remove(filename)
                     print()
 

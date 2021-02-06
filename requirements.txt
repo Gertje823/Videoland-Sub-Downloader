@@ -1,2 +1,3 @@
-requests==2.22.0
-beautifulsoup4==4.8.1
+requests==2.21.0
+beautifulsoup4==4.9.3
+vtt_to_srt3==0.1.8.5
