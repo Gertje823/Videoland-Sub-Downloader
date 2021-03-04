@@ -3,7 +3,6 @@ import urllib.request
 from bs4 import BeautifulSoup
 from vtt_to_srt import vtt_to_srt
 
-cookie = {'vlId': 'YOUR_vlId_HERE'}
 
 url = input("Wat is de Videoland url?")
 url_pattern = "(https?:\/\/(?:www\.|(?!www)))videoland.com\/series\/(.*?)\/(.*?)\/\\\?(.*)"
@@ -35,7 +34,6 @@ if "/films/" in url:
 elif "/series/" in url:
     try:
         link = re.search(url_pattern, url).group(4)
-        print(link)
         url= url.replace(link,"")
     except:
         pass
@@ -84,9 +82,8 @@ elif "/series/" in url:
                         print("Converting to srt")
                         vtt_to_srt.vtt_to_srt(filename)
                         os.remove(filename)
-                    print()
 
-        season_num = +1
+        season_num +=1
 
 else:
     print("Fout in URL. Probeer het opnieuw.")
