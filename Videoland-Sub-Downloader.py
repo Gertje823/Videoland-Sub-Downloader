@@ -3,6 +3,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 from vtt_to_srt import vtt_to_srt
 
+cookie = {'vlId': 'YOUR_vlId_HERE'}
 
 url = input("Wat is de Videoland url?")
 url_pattern = "(https?:\/\/(?:www\.|(?!www)))videoland.com\/series\/(.*?)\/(.*?)\/\\\?(.*)"
