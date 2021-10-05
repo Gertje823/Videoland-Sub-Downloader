@@ -52,8 +52,6 @@ elif "/series/" in url:
     data = json.loads(json_data)
     season_num = 0
     # Check for wanted season
-    for season in data["videos"]["details"][f"S{x[4]}"]["refs"]:
-        if season_num == int(wanted_season)-1:
     for item in data["videos"]["details"]:
         try:
             if data["videos"]["details"][item]['type'] == "season" and data["videos"]["details"][item]['title'] == wanted_season:
