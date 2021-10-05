@@ -54,36 +54,41 @@ elif "/series/" in url:
     # Check for wanted season
     for season in data["videos"]["details"][f"S{x[4]}"]["refs"]:
         if season_num == int(wanted_season)-1:
-            season = season.replace("SN", "")
-            path = data["application"]["path"]["current"]
-            link = f"https://www.videoland.com{path}/{season}"
-            data = requests.get(link, cookies=cookie)
-            soup = BeautifulSoup(data.text, "html.parser")
-            pattern = "window.__INITIAL_STATE__ =(.*?);</script><script>"
-            json_data = re.search(pattern, data.text).group(1)
-            data = json.loads(json_data)
-            # Get ids of episodes in season
-            for episodes in data["videos"]["details"].items():
-                if episodes[1]["type"] == "episode":
-                    id = episodes[1]["id"]
-                    link = f"https://www.videoland.com/api/v3/subtitles/{id}"
-                    Ep = episodes[1]["position"]
-                    Ep = "{0:0=2d}".format(Ep)
-                    filename = f"{title}.S{Season}E{Ep}.vtt"
-                    filename = filename.replace(":", "")
-                    Ep = int(Ep)
-                    r = requests.get(link, cookies=cookie)
-                    # Check if sub is available
-                    if r.status_code == 404:
-                        print("Sorry, er is geen ondertiteling gevonden voor deze aflevering")
-                    else:
-                        # Download sub
-                        print(f"{filename} aan het downloaden")
-                        open(filename, 'wb').write(r.content)
-                        print("Converting to srt")
-                        vtt_to_srt.vtt_to_srt(filename)
-                        os.remove(filename)
-
+    for item in data["videos"]["details"]:
+        try:
+            if data["videos"]["details"][item]['type'] == "season" and data["videos"]["details"][item]['title'] == wanted_season:
+                season = data["videos"]["details"][item]['ref'].replace("SN", "")
+                path = data["application"]["path"]["current"]
+                link = f"https://www.videoland.com{path}/{season}"
+                print(link)
+                data = requests.get(link, cookies=cookie)
+                soup = BeautifulSoup(data.text, "html.parser")
+                pattern = "window.__INITIAL_STATE__ =(.*?);</script><script>"
+                json_data = re.search(pattern, data.text).group(1)
+                data = json.loads(json_data)
+                # Get ids of episodes in season
+                for episodes in data["videos"]["details"].items():
+                    if episodes[1]["type"] == "episode":
+                        id = episodes[1]["id"]
+                        link = f"https://www.videoland.com/api/v3/subtitles/{id}"
+                        Ep = episodes[1]["position"]
+                        Ep = "{0:0=2d}".format(Ep)
+                        filename = f"{title}.S{Season}E{Ep}.vtt"
+                        filename = filename.replace(":", "")
+                        Ep = int(Ep)
+                        r = requests.get(link, cookies=cookie)
+                        # Check if sub is available
+                        if r.status_code == 404:
+                            print("Sorry, er is geen ondertiteling gevonden voor deze aflevering")
+                        else:
+                            # Download sub
+                            print(f"{filename} aan het downloaden")
+                            open(filename, 'wb').write(r.content)
+                            print("Converting to srt")
+                            vtt_to_srt.vtt_to_srt(filename)
+                            os.remove(filename)
+        except KeyError:
+            pass
         season_num +=1
 
 else:
