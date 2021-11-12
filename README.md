@@ -4,7 +4,7 @@ Voor het downloaden is wel een videoland account nodig. Dit hoeft echter geen be
 
 
 ## Hoe werkt het
-1. Zet je cookie in de `Videoland-Sub-Downloader.py` op regel 6.
+1. Zet je cookie in de `Videoland-Sub-Downloader.py` op regel 6. (Cookie is niet langer vereist. Je kunt deze stap overslaan)
 2. Run het script `python3 Videoland-Sub-Downloader.py`
 3. Vul de Videoland url in waarvan je de ondertiteling wilt downloaden.
 4. Als het een serie is vul dan het nummer van het seizoen in.
