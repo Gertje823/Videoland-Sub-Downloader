@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from vtt_to_srt import vtt_to_srt
 
 cookie = {'vlId': 'YOUR_vlId_HERE'}
-
+invalid = '<>:"/\|?* '
 url = input("Wat is de Videoland url?")
 url_pattern = "(https?:\/\/(?:www\.|(?!www)))videoland.com\/series\/(.*?)\/(.*?)\/\\\?(.*)"
 if "/films/" in url:
@@ -20,7 +20,8 @@ if "/films/" in url:
     year = movie_info[0]
     print(year)
     filename = f"{title}.({year}).vtt"
-    filename = filename.replace(":","")
+    for char in invalid:
+        filename = filename.replace(char, '')
     link = f"https://www.videoland.com/api/v3/subtitles/{x[4]}"
     r = requests.get(link, cookies=cookie)
     if r.status_code == 404:
@@ -58,7 +59,6 @@ elif "/series/" in url:
                 season = data["videos"]["details"][item]['ref'].replace("SN", "")
                 path = data["application"]["path"]["current"]
                 link = f"https://www.videoland.com{path}/{season}"
-                print(link)
                 data = requests.get(link, cookies=cookie)
                 soup = BeautifulSoup(data.text, "html.parser")
                 pattern = "window.__INITIAL_STATE__ =(.*?);</script><script>"
@@ -69,10 +69,12 @@ elif "/series/" in url:
                     if episodes[1]["type"] == "episode":
                         id = episodes[1]["id"]
                         link = f"https://www.videoland.com/api/v3/subtitles/{id}"
+                        print(link)
                         Ep = episodes[1]["position"]
                         Ep = "{0:0=2d}".format(Ep)
                         filename = f"{title}.S{Season}E{Ep}.vtt"
-                        filename = filename.replace(":", "")
+                        for char in invalid:
+                            filename = filename.replace(char, '')
                         Ep = int(Ep)
                         r = requests.get(link, cookies=cookie)
                         # Check if sub is available
